@@ -19,6 +19,10 @@ Features:
 - Returns promise-compatible (jQuery deferred) for ok/cancel actions.
 - Compact! (about 150 lines)
 
+## Demo
+
+A quick demo can be found on CodePen: http://codepen.io/claviska/pen/mPNWxy
+
 ## Installing
 
 Include the minified version of this plugin in your project or install via NPM:
