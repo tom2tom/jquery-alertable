@@ -75,7 +75,7 @@ if(jQuery) (function($) {
             if( event.keyCode === 13 || event.keyCode === 27 ) {
                 event.preventDefault();
                 hide(options);
-                if( event.keyCode === 13 ) {
+                if( event.keyCode === 13 && !$(event.target).is(cancelButton) ) {
                     defer.resolve();
                 } else {
                     defer.reject();

@@ -1,7 +1,7 @@
 {
   "name": "@claviska/jquery-alertable",
   "description": "Minimal alert and confirmation alternatives.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Cory LaViska",
   "homepage": "https://github.com/claviska/jquery-alertable",
   "license": "MIT",
