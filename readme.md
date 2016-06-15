@@ -1,4 +1,4 @@
-# jquery.alertable.js - Minimal alert and confirmation alternatives.
+# jquery.alertable.js - Minimal alert, confirm, and prompt replacements.
 
 Developed by Cory LaViska for A Beautiful Site, LLC
 
@@ -13,15 +13,18 @@ Features:
 - Simple syntax:
     - `$.alertable.alert('Howdy!')`
     - `$.alertable.confirm('You sure?').then(function() { ... })`
+    - `$.alertable.prompt('How many?').then(function(data) { ... })`
 - Minimal default styles; easy to customize or write your own.
 - Show/hide hooks for adding custom animation (works well with Velocity.js).
 - Prevents focus from leaving the modal.
 - Returns promise-compatible (jQuery deferred) for ok/cancel actions.
-- Compact! (about 150 lines)
+- Compact! (about 180 lines)
 
 ## Demo
 
 A quick demo can be found on CodePen: http://codepen.io/claviska/pen/mPNWxy
+
+A local demo can be found in `example.html`.
 
 ## Installing
 
@@ -63,11 +66,29 @@ $.alertable.confirm('You sure?').then(function() {
 });
 ```
 
-**Important:** Unlike `window.alert()` and `window.confirm()`, using this plugin *will not* cause execution of the script to stop while the modal is open. This behavior is not possible to emulate with a plugin nor is it desirable in modern web applications.
+Example prompts:
+
+```javascript
+// Basic example
+$.alertable.prompt('How many?').then(function(data) {
+    // Prompt was submitted
+});
+
+// Example with then/always
+$.alertable.prompt('How many?').then(function(data) {
+    // Prompt was submitted
+}, function() {
+    // Prompt was canceled
+}).always(function() {
+    // Modal was dismissed
+});
+```
+
+**Important:** Unlike `window.alert()`, `window.confirm()`, and `window.prompt()`, using this plugin *will not* cause execution of the script to stop while the modal is open. This behavior is not possible to emulate with a plugin nor is it desirable in modern web applications.
 
 ### Options
 
-Pass options as the second argument of either method:
+Pass options as the second argument of any method:
 
 ```javascript
 $.alertable.alert('Howdy!', {
@@ -76,6 +97,11 @@ $.alertable.alert('Howdy!', {
 });
 
 $.alertable.confirm('You sure?', {
+    optionName: optionValue,
+    ...
+});
+
+$.alertable.prompt('How many?', {
     optionName: optionValue,
     ...
 });
@@ -100,6 +126,11 @@ Available options:
 - `overlay`: HTML to use for the overlay. Default value:
 ```html
 <div class="alertable-overlay"></div>
+```
+
+- `prompt`: HTML to use for the prompt body. All inputs contained in this HTML will be serialized and returned when the prompt is submitted. Default value:
+```html
+<input class="alertable-input" type="text" name="value">
 ```
 
 - `modal`: HTML to use for the modal. Default value:
