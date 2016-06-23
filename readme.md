@@ -6,7 +6,7 @@ Licensed under the MIT license: http://opensource.org/licenses/MIT
 
 ## Overview:
 
-This plugin provides a minimal, lightweight, and customizable alternative to `window.alert()` and `window.confirm()`. It's flexible enough to mold to your application's existing stylesheet and markup.
+This plugin provides a minimal, lightweight, and customizable alternative to `window.alert()`, `window.confirm()`, and `window.prompt()`. It's flexible enough to mold to your application's existing stylesheet and markup.
 
 Features:
 
@@ -159,4 +159,4 @@ $.alertable.defaults.optionName = yourValue;
 
 ### Promises
 
-Both `alert` and `confirm` return a promise-compatible ([jQuery-deferred](https://api.jquery.com/jquery.deferred/)) object. As a result, you can use any of the supported chainable methods. However, the examples above demonstrate the most appropriate ones to use.
+All methods return a promise-compatible ([jQuery-deferred](https://api.jquery.com/jquery.deferred/)) object. As a result, you can use any of the supported chainable methods. However, the examples above demonstrate the most appropriate ones to use.
