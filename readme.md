@@ -135,10 +135,11 @@ Available options:
 
 - `modal`: HTML to use for the modal. Default value:
 ```html
-<div class="alertable">
+<form class="alertable">
     <div class="alertable-message"></div>
+    <div class="alertable-prompt"></div>
     <div class="alertable-buttons"></div>
-</div>
+</form>
 ```
 
 - `hide`: Function for hiding the modal and overlay. Use `this.modal` and `this.overlay` to reference the modal and overlay elements. Default value:
