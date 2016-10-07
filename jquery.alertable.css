@@ -72,7 +72,7 @@
 }
 
 .alertable-ok:hover,
-.alertable-ok:focus.
+.alertable-ok:focus,
 .alertable-ok:active {
     background-color: #08c;
 }
