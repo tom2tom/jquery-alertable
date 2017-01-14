@@ -42,7 +42,7 @@ Example alerts:
 // Basic example
 $.alertable.alert('Howdy!');
 
-// Example with action when the modal is dismissed
+// Example with action when the dialog is dismissed
 $.alertable.alert('Howdy!').always(function() {
     // Modal was dismissed
 });
@@ -111,34 +111,40 @@ Available options:
 
 - `container`: The container to append the modal to. Defaults to 'body'.
 
-- `html`: Whether or not your message contains HTML. Defaults to `false`.
+- `html`: Whether or not the displayed prompt-message contains HTML. Defaults to `false`.
 
-- `cancelButton`: HTML to use for the reject button. Default value:
-```html
-<button class="alertable-cancel" type="button">Cancel</button>
-```
+- `cancelName`: Label for reject button, unless pre-empted by cancelButton option. Defaults to 'Cancel'.
 
-- `okButton`: HTML to use for the resolve button. Default value:
+- `okName`: Label for resolve button, unless pre-empted by okButton option. Defaults to 'OK'.
+
+- `cancelButton`: HTML to use for the reject button. Something like
 ```html
-<button class="alertable-ok" type="button">OK</button>
+<button id="alertable-cancel" type="button">Cancel</button>
 ```
+Default value: `null`.
+
+- `okButton`: HTML to use for the resolve button. Something like
+```html
+<button id="alertable-ok" type="button">OK</button>
+```
+Default value: `null`.
 
 - `overlay`: HTML to use for the overlay. Default value:
 ```html
-<div class="alertable-overlay"></div>
+<div id="alertable-overlay"></div>
 ```
 
 - `prompt`: HTML to use for the prompt body. All inputs contained in this HTML will be serialized and returned when the prompt is submitted. Default value:
 ```html
-<input class="alertable-input" type="text" name="value">
+<input id="alertable-input" type="text" name="value">
 ```
 
-- `modal`: HTML to use for the modal. Default value:
+- `modal`: HTML to use for the modal objects. Default value:
 ```html
-<form class="alertable">
-    <div class="alertable-message"></div>
-    <div class="alertable-prompt"></div>
-    <div class="alertable-buttons"></div>
+<form id="alertable">
+    <p id="alertable-message"></p>
+    <div id="alertable-prompt"></div>
+    <div id="alertable-buttons"></div>
 </form>
 ```
 
