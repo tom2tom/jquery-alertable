@@ -6,7 +6,7 @@
 */
 
 /* Modal */
-.alertable {
+#alertable {
     position: fixed;
     z-index: 9999;
     top: 38vh;
@@ -19,7 +19,7 @@
 }
 
 /* Overlay */
-.alertable-overlay {
+#alertable-overlay {
     position: fixed;
     z-index: 9998;
     top: 0;
@@ -30,16 +30,16 @@
 }
 
 /* Message */
-.alertable-message {
+#alertable-message {
     margin-bottom: 20px;
 }
 
 /* Prompt */
-.alertable-prompt {
+#alertable-prompt {
     margin-bottom: 20px;
 }
 
-.alertable-input {
+#alertable-input {
     width: 100%;
     border-radius: 4px;
     box-shadow: none;
@@ -54,12 +54,12 @@
 }
 
 /* Button group */
-.alertable-buttons {
+#alertable-buttons {
     text-align: right;
 }
 
 /* OK button */
-.alertable-ok {
+#alertable-ok {
     background: #09d;
     border: solid 1px #09d;
     font-family: inherit;
@@ -71,14 +71,14 @@
     cursor: pointer;
 }
 
-.alertable-ok:hover,
-.alertable-ok:focus,
-.alertable-ok:active {
+#alertable-ok:hover,
+#alertable-ok:focus,
+#alertable-ok:active {
     background-color: #08c;
 }
 
 /* Cancel button */
-.alertable-cancel {
+#alertable-cancel {
     border: solid 1px #ddd;
     background: white;
     font-family: inherit;
@@ -90,8 +90,8 @@
     cursor: pointer;
 }
 
-.alertable-cancel:hover,
-.alertable-cancel:focus,
-.alertable-cancel:active {
+#alertable-cancel:hover,
+#alertable-cancel:focus,
+#alertable-cancel:active {
     background-color: #f2f2f2;
 }
