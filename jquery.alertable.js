@@ -1,11 +1,11 @@
-//
-// jquery.alertable.js - Minimal alert, confirmation, and prompt alternatives.
-//
-// Developed by Cory LaViska for A Beautiful Site, LLC
-//
-// Licensed under the MIT license: http://opensource.org/licenses/MIT
-//
-if(jQuery) (function($) {
+/*! jquery-alertable 1.1.0
+ Minimal alert, confirmation, and prompt alternatives
+ Derived from V.1.0.2 by Cory LaViska https://twitter.com/claviska
+ Licensed under the MIT license
+*/
+//requires jQuery 1.7+
+
+if(jQuery) (function($) { "$:nomunge,usestrict:nomunge";
     'use strict';
 
     var modal,
@@ -14,7 +14,7 @@ if(jQuery) (function($) {
         cancelButton,
         activeElement;
 
-    function show(type, message, options) {
+    function show(type, message, useroptions) {
         var defer = $.Deferred();
 
         // Remove focus from the background
@@ -25,7 +25,13 @@ if(jQuery) (function($) {
         $(modal).add(overlay).remove();
 
         // Merge options
-        options = $.extend({}, $.alertable.defaults, options);
+        var options = $.extend({}, $.alertable.defaults, useroptions);
+        if (!useroptions || typeof useroptions.okButton == 'undefined') {
+            options.okButton = '<button id="alertable-ok" type="submit">' + options.okName + '</button>';
+        }
+        if (!useroptions || typeof useroptions.cancelButton == 'undefined') {
+            options.cancelButton = '<button id="alertable-cancel" type="button">' + options.cancelName + '</button>';
+        }
 
         // Create elements
         modal = $(options.modal).hide();
@@ -34,21 +40,21 @@ if(jQuery) (function($) {
         cancelButton = $(options.cancelButton);
 
         // Add message
-        if( options.html ) {
-            modal.find('.alertable-message').html(message);
+        if (options.html) {
+            modal.find('#alertable-message').html(message);
         } else {
-            modal.find('.alertable-message').text(message);
+            modal.find('#alertable-message').text(message);
         }
 
         // Add prompt
-        if( type === 'prompt' ) {
-            modal.find('.alertable-prompt').html(options.prompt);
+        if (type === 'prompt') {
+            modal.find('#alertable-prompt').html(options.prompt);
         } else {
-            modal.find('.alertable-prompt').remove();
+            modal.find('#alertable-prompt').remove();
         }
 
         // Add buttons
-        $(modal).find('.alertable-buttons')
+        $(modal).find('#alertable-buttons')
         .append(type === 'alert' ? '' : cancelButton)
         .append(okButton);
 
@@ -62,9 +68,9 @@ if(jQuery) (function($) {
         });
 
         // Set focus
-        if( type === 'prompt' ) {
+        if (type === 'prompt') {
             // First input in the prompt
-            $(modal).find('.alertable-prompt :input:first').focus();
+            $(modal).find('#alertable-prompt :input:first').focus();
         } else {
             // OK button
             $(modal).find(':input[type="submit"]').focus();
@@ -78,9 +84,9 @@ if(jQuery) (function($) {
 
             event.preventDefault();
 
-            if( type === 'prompt' ) {
+            if (type === 'prompt') {
                 formData = $(modal).serializeArray();
-                for( i = 0; i < formData.length; i++ ) {
+                for( i = 0; i < formData.length; i++) {
                     values[formData[i].name] = formData[i].value;
                 }
             } else {
@@ -99,7 +105,7 @@ if(jQuery) (function($) {
 
         // Cancel on escape
         $(document).on('keydown.alertable', function(event) {
-            if( event.keyCode === 27 ) {
+            if (event.keyCode === 27) {
                 event.preventDefault();
                 hide(options);
                 defer.reject();
@@ -108,7 +114,7 @@ if(jQuery) (function($) {
 
         // Prevent focus from leaving the modal
         $(document).on('focus.alertable', '*', function(event) {
-            if( !$(event.target).parents().is('.alertable') ) {
+            if (!$(event.target).parents().is('#alertable')) {
                 event.stopPropagation();
                 event.target.blur();
                 $(modal).find(':input:first').focus();
@@ -155,17 +161,18 @@ if(jQuery) (function($) {
             // Preferences
             container: 'body',
             html: false,
-
+            // Labels
+            cancelName: 'Cancel',
+            okName: 'OK',
             // Templates
-            cancelButton: '<button class="alertable-cancel" type="button">Cancel</button>',
-            okButton: '<button class="alertable-ok" type="submit">OK</button>',
-            overlay: '<div class="alertable-overlay"></div>',
-            prompt: '<input class="alertable-input" type="text" name="value">',
-            modal:
-                '<form class="alertable">' +
-                '<div class="alertable-message"></div>' +
-                '<div class="alertable-prompt"></div>' +
-                '<div class="alertable-buttons"></div>' +
+            cancelButton: null,
+            okButton: null,
+            overlay: '<div id="alertable-overlay"></div>',
+            prompt: '<input id="alertable-input" type="text" name="value">',
+            modal: '<form id="alertable">' +
+                '<p id="alertable-message"></p>' +
+                '<div id="alertable-prompt"></div>' +
+                '<div id="alertable-buttons"></div>' +
                 '</form>',
 
             // Hooks
